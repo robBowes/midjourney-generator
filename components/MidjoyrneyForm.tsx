@@ -70,6 +70,7 @@ export const MidjourneyForm = () => {
                   { value: "", label: "None" },
                   { value: "Steampunk" },
                   { value: "Digital art" },
+                  { value: "Gouache and ink illustration" },
                 ]}
               />
             </Box>

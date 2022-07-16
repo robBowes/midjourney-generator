@@ -27,7 +27,7 @@ export const Select = ({ name, label, options }: SelectProps) => {
             onChange={input.onChange}
           >
             {options.map((option) => (
-              <MenuItem value={option.value}>
+              <MenuItem value={option.value} key={option.value}>
                 {option.label || option.value}
               </MenuItem>
             ))}
