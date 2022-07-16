@@ -5,12 +5,14 @@ import Button from "@mui/material/Button"
 import { Checkbox } from "./fields/Checkbox"
 import { Select } from "./fields/Select"
 import { Box } from "@mui/system"
+import { FormGroup } from "@mui/material"
 
 type MidjoyrneyInputs = {
   mainIdea: string
   byArtist: boolean
   artistName: string
   style: string
+  eightK: boolean
   test: boolean
 }
 
@@ -22,14 +24,19 @@ export const MidjourneyForm = () => {
     test,
     artistName,
     byArtist,
+    style,
+    eightK,
   }: MidjoyrneyInputs) => {
     console.log(test)
-    const flags = [test && "--test"].filter(Boolean).join("")
-    const parts = [artistName && `painting by ${artistName}`]
+    const parts = [artistName && `painting by ${artistName}`, style]
       .filter(Boolean)
       .join("::")
+    const renderingStyle = [eightK && "8k"].filter(Boolean)
+    const flags = [test && "--test"].filter(Boolean).join("")
 
-    const propmt = `${mainIdea}${parts && "::" + parts} ${flags}`
+    const propmt = `${mainIdea}${parts && "::" + parts}${
+      renderingStyle && "::" + renderingStyle
+    } ${flags}`
     setMidjourneyPrompt(propmt)
     navigator.clipboard.writeText(propmt)
   }
@@ -49,7 +56,7 @@ export const MidjourneyForm = () => {
                 name='artistName'
                 label='Artist Name'
                 options={[
-                  { value: "" },
+                  { value: "", label: "None" },
                   { value: "Hiroshige" },
                   { value: "Hokusai" },
                 ]}
@@ -60,12 +67,15 @@ export const MidjourneyForm = () => {
                 name='style'
                 label='Style'
                 options={[
-                  { value: "" },
+                  { value: "", label: "None" },
                   { value: "Steampunk" },
                   { value: "Digital art" },
                 ]}
               />
             </Box>
+            <FormGroup>
+              <Checkbox name='eightK' label='8k' />
+            </FormGroup>
             <div>
               <Checkbox name='test' label='Use beta features' />
             </div>
