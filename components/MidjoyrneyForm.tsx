@@ -3,6 +3,8 @@ import { Field, Form } from "react-final-form"
 import { TextField } from "./fields/TextField"
 import Button from "@mui/material/Button"
 import { Checkbox } from "./fields/Checkbox"
+import { Select } from "./fields/Select"
+import { Box } from "@mui/system"
 
 type MidjoyrneyInputs = {
   mainIdea: string
@@ -25,7 +27,8 @@ export const MidjourneyForm = () => {
     const parts = [artistName && `painting by ${artistName}`]
       .filter(Boolean)
       .join("::")
-    const propmt = `${mainIdea}${parts} ${flags}`
+
+    const propmt = `${mainIdea}${parts && "::" + parts} ${flags}`
     setMidjourneyPrompt(propmt)
     navigator.clipboard.writeText(propmt)
   }
@@ -38,24 +41,17 @@ export const MidjourneyForm = () => {
         render={({ handleSubmit, errors }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor='mainIdea'></label>
               <TextField name='mainIdea' label='Main Idea' required />
             </div>
+            <Box my={2}>
+              <Select
+                name='artistName'
+                label='Artist Name'
+                options={[{ value: "" }, { value: "Hiroshige" }]}
+              />
+            </Box>
             <div>
-              <div>
-                <label htmlFor='byArtist'>By artist:</label>
-                <Field<string>
-                  component='select'
-                  name='artistName'
-                  id='mainIdea'
-                >
-                  <option />
-                  <option value='Hiroshige'>Hiroshige</option>
-                </Field>
-              </div>
-            </div>
-            <div>
-              <Checkbox name='test' label='Test' />
+              <Checkbox name='test' label='Use beta features' />
             </div>
             <Button variant='contained' type='submit'>
               Submit
