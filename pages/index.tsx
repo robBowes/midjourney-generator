@@ -3,6 +3,10 @@ import Head from "next/head"
 import Image from "next/image"
 import { MidjourneyForm } from "../components/MidjoyrneyForm"
 import styles from "../styles/Home.module.css"
+import "@fontsource/roboto/300.css"
+import "@fontsource/roboto/400.css"
+import "@fontsource/roboto/500.css"
+import "@fontsource/roboto/700.css"
 
 const Home: NextPage = () => {
   return (
@@ -19,7 +23,7 @@ const Home: NextPage = () => {
         <MidjourneyForm />
       </main>
 
-      <footer className={styles.footer}></footer>
+      <footer className={styles.footer}>Created by: Robert Bowes</footer>
     </div>
   )
 }

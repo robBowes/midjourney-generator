@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Field, Form } from "react-final-form"
-import TextField from "@mui/material/TextField"
+import { TextField } from "./fields/TextField"
+import Button from "@mui/material/Button"
+import { Checkbox } from "./fields/Checkbox"
 
 type MidjoyrneyInputs = {
   mainIdea: string
@@ -23,7 +25,7 @@ export const MidjourneyForm = () => {
     const parts = [artistName && `painting by ${artistName}`]
       .filter(Boolean)
       .join("::")
-    const propmt = `${mainIdea}::${parts} ${flags}`
+    const propmt = `${mainIdea}${parts} ${flags}`
     setMidjourneyPrompt(propmt)
     navigator.clipboard.writeText(propmt)
   }
@@ -37,30 +39,15 @@ export const MidjourneyForm = () => {
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor='mainIdea'></label>
-              <Field<string>
-                name='mainIdea'
-                render={({ input }) => (
-                  <TextField
-                    label='Main Idea'
-                    variant='standard'
-                    id='mainIdea'
-                    value={input.value}
-                    onChange={input.onChange}
-                    required
-                  />
-                )}
-                validate={(value) => (!value ? "required" : undefined)}
-              />
+              <TextField name='mainIdea' label='Main Idea' required />
             </div>
             <div>
               <div>
                 <label htmlFor='byArtist'>By artist:</label>
-
                 <Field<string>
                   component='select'
                   name='artistName'
                   id='mainIdea'
-                  validate={(value) => (!value ? "required" : undefined)}
                 >
                   <option />
                   <option value='Hiroshige'>Hiroshige</option>
@@ -68,10 +55,11 @@ export const MidjourneyForm = () => {
               </div>
             </div>
             <div>
-              <label htmlFor='test'>Test</label>
-              <Field component='input' type='checkbox' name='test' id='test' />
+              <Checkbox name='test' label='Test' />
             </div>
-            <button type='submit'>Submit</button>
+            <Button variant='contained' type='submit'>
+              Submit
+            </Button>
           </form>
         )}
       />
