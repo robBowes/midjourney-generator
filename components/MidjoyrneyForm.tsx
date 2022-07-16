@@ -10,6 +10,7 @@ type MidjoyrneyInputs = {
   mainIdea: string
   byArtist: boolean
   artistName: string
+  style: string
   test: boolean
 }
 
@@ -47,7 +48,22 @@ export const MidjourneyForm = () => {
               <Select
                 name='artistName'
                 label='Artist Name'
-                options={[{ value: "" }, { value: "Hiroshige" }]}
+                options={[
+                  { value: "" },
+                  { value: "Hiroshige" },
+                  { value: "Hokusai" },
+                ]}
+              />
+            </Box>
+            <Box my={2}>
+              <Select
+                name='style'
+                label='Style'
+                options={[
+                  { value: "" },
+                  { value: "Steampunk" },
+                  { value: "Digital art" },
+                ]}
               />
             </Box>
             <div>
